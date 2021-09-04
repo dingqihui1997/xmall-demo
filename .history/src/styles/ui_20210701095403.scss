@@ -1,0 +1,51 @@
+.login {
+    .el-input__inner {
+        width: 370px;
+        height: 50px;
+    }
+
+    .el-input__suffix {
+        position: absolute;
+        right: 50px;
+    }
+
+    .el-input {
+        position: relative;
+    }
+}
+
+.carousel {
+    .el-carousel__button {
+        width: 15px !important;
+        height: 15px !important;
+        border-radius: 100% !important;
+    }
+}
+
+.Category {
+    height: 60px;
+    background: linear-gradient(#fbfbfb, #ececec);
+    box-shadow: 0 1px 7px rgb(0 0 0 / 6%);
+    padding-left: 25px;
+}
+
+// @keyframes move {
+    //     from {
+    //         transform: translateY(-3px);
+    //         box-shadow: 1px 1px 20px #999;
+    //     }
+
+    //     to {
+    //         transform: translateY(-3px);
+    //     }
+    // }
+
+.item {
+    transition: all .5s; //位移阴影效果
+}
+
+.item:hover {
+    transform: translateY(-3px);
+    box-shadow: 1px 1px 20px #999;
+}
+.

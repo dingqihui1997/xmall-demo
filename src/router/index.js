@@ -1,0 +1,83 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Lazyout from '../views/lazyout/Lazyout.vue'
+Vue.use(VueRouter)
+
+const originalPush = VueRouter.prototype.push;
+const originalReplace = VueRouter.prototype.replace;
+//push
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject)
+    return originalPush.call(this, location, onResolve, onReject);
+  return originalPush.call(this, location).catch(err => err);
+};
+//replace
+VueRouter.prototype.replace = function push(location, onResolve, onReject) {
+  if (onResolve || onReject)
+    return originalReplace.call(this, location, onResolve, onReject);
+  return originalReplace.call(this, location).catch(err => err);
+};
+
+
+const routes = [
+
+  {//登录
+    path: '/signin',
+    name: 'Signin',
+    component: () => import('../components/signin/Signin.vue'),
+    meta: {
+      title: '登录'
+    }
+  },
+  {//注册
+    path: '/register',
+    name: 'Register',
+    component: () => import('../components/register/Register.vue'),
+    meta: {
+      title: '注册'
+    }
+  },
+  {
+    path: '',
+    component: Lazyout,
+    children: [
+      {//首页 
+        path: '/',
+        name: 'Home',
+        component: Home,
+        meta: {
+          title: '首页'
+        }
+      },
+      {//全部
+        path: '/whole',
+        name: 'Whole',
+        component: () => import('../views/whole/Whole.vue'),
+        meta: {
+          title: '全部商品'
+        }
+      }, {
+        path: '/details',
+        name: 'Details',
+        component: () => import('../views/details/Details.vue'),
+        meta: {
+          title: '详情页'
+        }
+      }
+    ]
+  }
+
+
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
+})
+export default router

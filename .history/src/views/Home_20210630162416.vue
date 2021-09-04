@@ -1,0 +1,46 @@
+<template>
+  <div>
+    <carousel v-if="list" :list="list[0]"></carousel>
+    <new-products v-if="list" :list="list[1]"></new-products>
+    <hot v-if="list" :list="list[2]"></hot>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import Carousel from "../components/carousel/Carousel .vue";
+import NewProducts from "../components/newProducts/NewProducts.vue";
+import Hot from "../components/hot/Hot.vue";
+export default {
+  name: "",
+  props: {},
+  data() {
+    return {
+      list: null,
+    };
+  },
+  components: { Carousel, NewProducts, Hot },
+  methods: {
+    getData() {
+      axios
+        .get("api/goods/home")
+        .then((res) => {
+          // console.log(res);
+          this.list = res.data.data;
+          // console.log(this.list);
+        })
+        .catch((err) => {
+          console.log("请求失败", err);
+        });
+    },
+  },
+  mounted() {
+    this.getData();
+  },
+  computed: {},
+  watch: {},
+};
+</script>
+
+<style lang='scss' scoped>
+</style>

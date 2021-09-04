@@ -1,0 +1,39 @@
+<template>
+  <div>
+    <div class="box marginauto flex"></div>
+    <div class="flex1" v-for="(item, index) in arr"></div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "",
+  props: {
+    list: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      arr: null,
+    };
+  },
+  components: {},
+  methods: {},
+  mounted() {
+    console.log(this.list);
+    this.arr = this.list.panelContents;
+  },
+  computed: {},
+  watch: {},
+};
+</script>
+
+<style lang='scss' scoped>
+.box {
+  width: 1220px;
+  height: 200px;
+  background-color: aqua;
+}
+</style>
